@@ -23,21 +23,20 @@
 
       <span id='interaction'>
         <div>
-          <input id='guess' placeholder="Enter a guess (1-100)">
+          <input id='guess' placeholder="Enter a guess (1-100)" onchange='allowClear()'>
         <div>
 
         <div id='menu'>
           <span><button id="guess" class="menu-button" onclick="submitGuess()">Guess</ button></span>
-          <span><button id="clear" class="menu-button" onclick="clearForm()"  >Clear</  button></span>
+          <span><button id="clear" class="menu-button" onclick="clearForm('guess')" disabled=true >Clear</  button></span>
         </div>
 
-        <div id='previousGuess'>
-          <p class='feedbackText' id='guessTitle' hidden=true>Your last guess was</p>
+        <div id='previousGuess' hidden=true>
+          <!-- <p class='feedbackText' id='guessTitle' hidden=true>Your last guess was</p> -->
+          <p class='feedbackText' id='guessTitle'>Your last guess was</p>
           <p id='lastGuess' ></p>
           <p class='feedbackText'id='feedback'></p>
-          <div>
-            <button id="reset" class="menu-button" onclick="restartGame()">Reset</ button>
-          </div>
+          <button id="reset" class="menu-button" onclick="restartGame()">Reset</ button>
         </div>
 
       </span>

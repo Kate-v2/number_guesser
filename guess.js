@@ -14,6 +14,14 @@ function pickNumber() {
   return num
 }
 
+function allowClear() {
+  toggleDisabled('clear', false)
+}
+
+function toggleDisabled(id, bool) {
+  document.getElementById(id).disabled = bool
+}
+
 // --- Interaction ---
 
 function getValue(id) {
@@ -41,7 +49,7 @@ function setMax() {
 // --- Displaying Last Guess ---
 
 function displayGuess() {
-  toggleHidden('guessTitle' , false)
+  toggleHidden('previousGuess' , false)
   displayFeedback()
   displayLast()
 }
@@ -109,7 +117,7 @@ function resetRange(){
 }
 
 function clearDisplayGuess() {
-  toggleHidden('guessTitle' , true)
+  toggleHidden('previousGuess' , true)
   freshElement('lastGuess')
   freshElement('feedback')
 }
