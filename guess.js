@@ -2,8 +2,8 @@
 
 // --- Setup ---
 
-var min = 1
-var max = 100
+var min = setMin()
+var max = setMax()
 var answer = pickNumber()
 var previous = []
 var guess
@@ -14,13 +14,27 @@ function pickNumber() {
   return num
 }
 
-
 // --- Interaction ---
+
+function getValue(id) {
+   element = document.getElementById(id)
+   return element.value
+}
 
 function submitGuess() {
   guess = document.getElementById('guess').value
   var invalid = ( isNaN(guess) || guess < min || guess > max )
   invalid ? alert("Invalid Number") : displayGuess()
+}
+
+function setMin() {
+  let low = getValue('min')
+  min = (low ? low : 1 )
+}
+
+function setMax() {
+  let high = getValue('max')
+  max = (high ? high : 100 )
 }
 
 
@@ -80,10 +94,18 @@ function freshElement(id) {
 
 function restartGame() {
   clearDisplayGuess()
-  clearForm()
+  clearForm('guess')
+  resetRange()
   clearGuesses()
   clearGuess()
   newNumber()
+}
+
+function resetRange(){
+  clearForm('min')
+  clearForm('max')
+  setMin()
+  setMax()
 }
 
 function clearDisplayGuess() {
@@ -92,8 +114,8 @@ function clearDisplayGuess() {
   freshElement('feedback')
 }
 
-function clearForm() {
-  document.getElementById('guess').value = '';
+function clearForm(id) {
+  document.getElementById(id).value = '';
 }
 
 function clearGuesses() {
