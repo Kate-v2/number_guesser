@@ -1,28 +1,60 @@
-// pry = require('pryjs')
-// eval(pry.it)
+
+
+// --- Setup ---
 
 var min = 1
-var max = 3
+var max = 100
 var answer = pickNumber()
 var previous = []
 var guess
 
 function pickNumber() {
-  // range = min + max
   range = max - min
-  // let number = Math.floor(Math.random() * max) + 1
-  // let number = Math.floor(Math.random() * max) + min
-  let number = Math.floor(Math.random() * range) + min
-  return number
+  let num = Math.floor(Math.random() * range) + min
+  return num
 }
+
+
+// --- Interaction ---
 
 function submitGuess() {
   guess = document.getElementById('guess').value
-  var text
   var invalid = ( isNaN(guess) || guess < min || guess > max )
-  text = invalid ? "Invalid Number" : validAnswer()
-  alert(text)
+  invalid ? alert("Invalid Number") : displayGuess()
 }
+
+
+// --- Displaying Last Guess ---
+
+function displayGuess() {
+  toggleHidden('guessTitle' , false)
+  displayFeedback()
+  displayLast()
+}
+
+function toggleHidden(id , bool) {
+  document.getElementById(id).hidden = bool
+}
+
+function displayFeedback() {
+  let element = freshElement('feedback')
+  let text = validAnswer()
+  addText(element, text)
+}
+
+function displayLast() {
+  let element = freshElement('lastGuess')
+  let val = previous[(previous.length - 1)]
+  addText(element, val)
+}
+
+function addText(element, text) {
+  let t = document.createTextNode(text)
+  element.appendChild(t)
+}
+
+
+// --- Comparing Guess ---
 
 function validAnswer() {
   previous.push(guess)
@@ -38,11 +70,26 @@ function answerFeedback() {
 }
 
 
+// --- Clearing ---
+
+function freshElement(id) {
+  let element = document.getElementById(id)
+  element.innerHTML = ''
+  return element
+}
+
 function restartGame() {
+  clearDisplayGuess()
   clearForm()
   clearGuesses()
   clearGuess()
   newNumber()
+}
+
+function clearDisplayGuess() {
+  toggleHidden('guessTitle' , true)
+  freshElement('lastGuess')
+  freshElement('feedback')
 }
 
 function clearForm() {
@@ -50,7 +97,7 @@ function clearForm() {
 }
 
 function clearGuesses() {
-  previous = []
+  previous = [null]
 }
 
 function clearGuess() {
