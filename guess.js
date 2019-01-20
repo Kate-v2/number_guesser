@@ -1,5 +1,4 @@
 
-
 // --- Setup ---
 
 var min = setMin()
@@ -9,7 +8,7 @@ var previous = []
 var guess
 
 function pickNumber() {
-  range = max - min
+  let range = max - min
   let num = Math.floor(Math.random() * range) + min
   return num
 }
