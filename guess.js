@@ -10,6 +10,7 @@ initialPlaceHolders()
 
 function pickNumber() {
   let range = (max - min)
+  // let num = Math.floor(Math.random() * range) + parseInt(min)
   let num = Math.floor(Math.random() * range) + min
   return num
 }
@@ -29,10 +30,7 @@ function initialPlaceHolders() {
 }
 
 function guessPlaceHolder() {
-  // let text = "Enter a guess (${min}-${max})"
-  // let text = 'Enter a guess (${min}-${max})'
   let text = 'Enter a guess (' + min + '-' + max + ')'
-  // document.getElementById('guess').placeholder = text
   changePlaceHolder('guess', text)
 }
 
@@ -55,7 +53,8 @@ function changePlaceHolder(id, text) {
 
 function getValue(id) {
    element = document.getElementById(id)
-   return element.value
+   let val = element.value
+   return parseInt(val)
 }
 
 function submitGuess() {
@@ -67,11 +66,13 @@ function submitGuess() {
 function setMin() {
   let low = getValue('min')
   min = (low ? low : 1 )
+  newNumber()
 }
 
 function setMax() {
   let high = getValue('max')
   max = (high ? high : 100 )
+  newNumber()
 }
 
 
@@ -113,11 +114,29 @@ function validAnswer() {
 }
 
 function compareWithAnswer() {
-  return (guess == answer) ? 'BOOM' : answerFeedback()
+  // return (guess == answer) ? 'BOOM' : answerFeedback()
+  return (guess == answer) ? expandRange() : answerFeedback()
 }
 
 function answerFeedback() {
   return (guess > answer) ? "Too High" : "Too Low"
+}
+
+function expandRange() {
+  min = min - 10
+  max = max + 10
+  let text = 'BOOM! \n The answer was indeed '+ guess + '.\n Next Level - Range Expanded'
+  nextLevel()
+  return text
+}
+
+function nextLevel() {
+  clearForm('min')
+  clearForm('max')
+  clearGuess()
+  clearGuessField()
+  newNumber()
+  initialPlaceHolders()
 }
 
 
@@ -136,6 +155,7 @@ function restartGame() {
   clearGuesses()
   clearGuess()
   newNumber()
+  initialPlaceHolders()
 }
 
 function resetRange(){
