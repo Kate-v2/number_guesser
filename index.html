@@ -5,27 +5,33 @@
     <link rel="stylesheet" href="styles.css">
   </head>
 
-  <!-- <body onload="pickNumber"> -->
   <body>
-    <h1>Welcome to Number Guesser</h1>
-
-    <h3>Enter a number between 1 and 100 to start guessing!</h3>
+    <header>
+      <h1 id='title'>Number <ins id='titleFragment'>Guesser</ins></h1>
+    </header>
 
     <div id='game'>
-      <!-- <input id='guess' onclick="pickNumber"> -->
       <span id='interaction'>
         <div>
-          <input id='guess'>
+          <input id='guess' placeholder="Enter a guess (1-100)">
         <div>
         <div id='menu'>
-          <span><button id="guess" class="menu-button" onclick="submitGuess()">Submit</ button></span>
+          <span><button id="guess" class="menu-button" onclick="submitGuess()">Guess</ button></span>
           <span><button id="clear" class="menu-button" onclick="clearForm()"  >Clear</  button></span>
-          <span><button id="reset" class="menu-button" onclick="restartGame()">Resart</ button></span>
         </div>
-      <span>
-      <span id='previous'>
-        <!-- make js display each number in array as new div in this span-->
-      <span>
+        <div id='previousGuess'>
+
+          <p class='feedbackText' id='guessTitle' hidden=true>Your last guess was</p>
+
+          <p id='lastGuess' ></p>
+
+          <p class='feedbackText'id='feedback'></p>
+
+          <div>
+            <button id="reset" class="menu-button" onclick="restartGame()">Reset</ button>
+          </div>
+        </div>
+      </span>
     </div>
 
     <script src="guess.js" type="text/javascript"></script>
