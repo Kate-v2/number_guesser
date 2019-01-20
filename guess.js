@@ -1,14 +1,16 @@
 
 // --- Setup ---
 
-var min = setMin()
-var max = setMax()
+var min; setMin();
+var max; setMax();
 var answer = pickNumber()
 var previous = []
 var guess
+initialPlaceHolders()
 
 function pickNumber() {
-  let range = max - min
+  let range = (max - min)
+  // let num = Math.floor(Math.random() * range) + parseInt(min)
   let num = Math.floor(Math.random() * range) + min
   return num
 }
@@ -21,11 +23,38 @@ function toggleDisabled(id, bool) {
   document.getElementById(id).disabled = bool
 }
 
+function initialPlaceHolders() {
+  guessPlaceHolder()
+  minPlaceHolder()
+  maxPlaceHolder()
+}
+
+function guessPlaceHolder() {
+  let text = 'Enter a guess (' + min + '-' + max + ')'
+  changePlaceHolder('guess', text)
+}
+
+function minPlaceHolder() {
+  let text = 'Min: ' + min
+  changePlaceHolder('min', text)
+}
+
+function maxPlaceHolder() {
+  let text = 'Max: ' + max
+  changePlaceHolder('max', text)
+}
+
+function changePlaceHolder(id, text) {
+  document.getElementById(id).placeholder = text
+}
+
+
 // --- Interaction ---
 
 function getValue(id) {
    element = document.getElementById(id)
-   return element.value
+   let val = element.value
+   return parseInt(val)
 }
 
 function submitGuess() {
@@ -37,11 +66,13 @@ function submitGuess() {
 function setMin() {
   let low = getValue('min')
   min = (low ? low : 1 )
+  newNumber()
 }
 
 function setMax() {
   let high = getValue('max')
   max = (high ? high : 100 )
+  newNumber()
 }
 
 
@@ -83,11 +114,29 @@ function validAnswer() {
 }
 
 function compareWithAnswer() {
-  return (guess == answer) ? 'BOOM' : answerFeedback()
+  // return (guess == answer) ? 'BOOM' : answerFeedback()
+  return (guess == answer) ? expandRange() : answerFeedback()
 }
 
 function answerFeedback() {
   return (guess > answer) ? "Too High" : "Too Low"
+}
+
+function expandRange() {
+  min = min - 10
+  max = max + 10
+  let text = 'BOOM! \n The answer was indeed '+ guess + '.\n Next Level - Range Expanded'
+  nextLevel()
+  return text
+}
+
+function nextLevel() {
+  clearForm('min')
+  clearForm('max')
+  clearGuess()
+  clearGuessField()
+  newNumber()
+  initialPlaceHolders()
 }
 
 
@@ -106,6 +155,7 @@ function restartGame() {
   clearGuesses()
   clearGuess()
   newNumber()
+  initialPlaceHolders()
 }
 
 function resetRange(){

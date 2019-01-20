@@ -14,16 +14,16 @@
 
       <div id='range'>
         <span class='range'>
-          <input id='min' placeholder="Min: 1" onchange="setMin()">
+          <input id='min' onchange="setMin()" onchange="minPlaceHolder()">
         </span>
         <span class='range'>
-          <input id='max' placeholder="Max: 100" onchange="setMax()">
+          <input id='max' onchange="setMax()" onchange="minPlaceHolder()">
         </span>
       </div>
 
       <span id='interaction'>
         <div>
-          <input id='guess' placeholder="Enter a guess (1-100)" onchange='disallowClear()'>
+          <input id='guess' onchange='disallowClear()'>
         <div>
 
         <div id='menu'>
