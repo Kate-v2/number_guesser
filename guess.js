@@ -1,14 +1,15 @@
 
 // --- Setup ---
 
-var min = setMin()
-var max = setMax()
+var min; setMin();
+var max; setMax();
 var answer = pickNumber()
 var previous = []
 var guess
+initialPlaceHolders()
 
 function pickNumber() {
-  let range = max - min
+  let range = (max - min)
   let num = Math.floor(Math.random() * range) + min
   return num
 }
@@ -20,6 +21,35 @@ function disallowClear(bool = false) {
 function toggleDisabled(id, bool) {
   document.getElementById(id).disabled = bool
 }
+
+function initialPlaceHolders() {
+  guessPlaceHolder()
+  minPlaceHolder()
+  maxPlaceHolder()
+}
+
+function guessPlaceHolder() {
+  // let text = "Enter a guess (${min}-${max})"
+  // let text = 'Enter a guess (${min}-${max})'
+  let text = 'Enter a guess (' + min + '-' + max + ')'
+  // document.getElementById('guess').placeholder = text
+  changePlaceHolder('guess', text)
+}
+
+function minPlaceHolder() {
+  let text = 'Min: ' + min
+  changePlaceHolder('min', text)
+}
+
+function maxPlaceHolder() {
+  let text = 'Max: ' + max
+  changePlaceHolder('max', text)
+}
+
+function changePlaceHolder(id, text) {
+  document.getElementById(id).placeholder = text
+}
+
 
 // --- Interaction ---
 
