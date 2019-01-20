@@ -14,8 +14,8 @@ function pickNumber() {
   return num
 }
 
-function allowClear() {
-  toggleDisabled('clear', false)
+function disallowClear(bool = false) {
+  toggleDisabled('clear', bool)
 }
 
 function toggleDisabled(id, bool) {
@@ -102,7 +102,7 @@ function freshElement(id) {
 
 function restartGame() {
   clearDisplayGuess()
-  clearForm('guess')
+  clearGuessField()
   resetRange()
   clearGuesses()
   clearGuess()
@@ -120,6 +120,11 @@ function clearDisplayGuess() {
   toggleHidden('previousGuess' , true)
   freshElement('lastGuess')
   freshElement('feedback')
+}
+
+function clearGuessField() {
+  clearForm('guess')
+  disallowClear(true)
 }
 
 function clearForm(id) {
