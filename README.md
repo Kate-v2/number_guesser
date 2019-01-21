@@ -27,11 +27,15 @@ The user has buttons to submit a guess (custom min/max does not have to be submi
 
 **Future**
 
-If a user enters an invalid value type in the min/max fields, they're not currently aware of what the system does. 
+* If a user enters an invalid value type in the min/max fields, they're not currently aware of what the system does. 
 
 Currently, the value used for that part of the range is the default value, either min: 1 or max: 100, even if the user was previously using a valid custom range, that limit still reverts to the default. 
 
 The user should be alerted of the error, and that form field should get cleared and ready to receive a correct value (and should also hold the placeholder of it's current value). Should the value maintain what it was last or still revert to the default upon alert?
+
+
+* There is currently no validation that the max is greater than and not equal to the min. If infact the user does enter these incorrectly, the game will break. The system may still pick a number answer, but the user is unable to enter any number - all numbers are invalid and an alert appears.
+
 
 
 
