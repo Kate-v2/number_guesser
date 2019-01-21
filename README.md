@@ -33,7 +33,7 @@ The user has buttons to submit a guess (custom min/max does not have to be submi
   * Should the value maintain what it was last or still revert to the default upon alert?
 
 
-* There is currently no validation that the max is greater than and not equal to the min. If infact the user does enter these incorrectly, the game will break. The system may still pick a number answer, but the user is unable to enter any number - all numbers are invalid and an alert appears.
+* There is currently no validation that the max is greater than and not equal to the min. If the user does enter these incorrectly, the game will break. The system may still pick a number answer, but the user is unable to enter any number - all numbers are invalid and an alert appears.
 
 
 
